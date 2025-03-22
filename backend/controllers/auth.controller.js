@@ -61,7 +61,16 @@ export const signup=async (req,res)=>{
         }
        })
    } catch (error) {
-    res.status(500).json({success:false,message:error.message})
+    let errorMessage = 'An error occurred';
+
+    if (error.name === 'ValidationError') {
+        // Extract the first validation error message
+        errorMessage = Object.values(error.errors)[0].message;
+    } else {
+        errorMessage = error.message;
+    }
+
+    res.status(400).json({ success: false, message: errorMessage });
    }
 }
 
