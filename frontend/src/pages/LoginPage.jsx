@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion';
-import { Mail, User,Lock, Loader, UserPlus,ArrowRight } from 'lucide-react';
+import { Mail, User,Lock, Loader, UserPlus,ArrowRight, LogInIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useUserStore } from '../../store/useUserStore';
 const LoginPage = () => {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
-  const loading=true;
+  const {login,loading}=useUserStore()
   const handleSubmit=(e)=>{
     e.preventDefault();
+    login(email,password)
   }
   return (
     <div className='flex flex-col justify-center py-12 sm:px-6 '>
@@ -75,8 +77,8 @@ const LoginPage = () => {
          <Loader className='mr-2 h-5 w-5 animate-spin ' aria-hidden="true"/>
          Loading...
          </>):(<>
-         <UserPlus className='mr-2 h-5 w-5' aria-hidden="true"/>
-         SignUp
+         <LogInIcon className='mr-2 h-5 w-5' aria-hidden="true"/>
+         Login
          </>)}
        </button>
           </form>
