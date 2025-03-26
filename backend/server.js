@@ -11,7 +11,7 @@ import analyticsRoutes from './routes/analytics.routes.js'
 dotenv.config();
 
 const app=express();
-app.use(express.json());
+app.use(express.json({limit:"10mb"}));
 app.use(cookieParser());
 const PORT=process.env.PORT||5000;
 

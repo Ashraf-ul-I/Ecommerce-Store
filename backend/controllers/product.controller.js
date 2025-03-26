@@ -73,7 +73,7 @@ export const deleteProduct=async (req,res)=>{
            }
         }
 
-        await product.findByIdAndDelete(req.params.id);
+        await Product.findByIdAndDelete(req.params.id);
         res.json({message:"Product deleted Successfully"});
     } catch (error) {
         res.status(500).json({message:"Server error",error:error.message})
@@ -104,7 +104,7 @@ export const getProductsCategory= async (req,res)=>{
     const {category}=req.params;
     try {
         const products=await Product.find({category});
-        res.json(products);
+        res.json({products});
     } catch (error) {
         res.status(500).json({message:"Server error",error:error.message})
     }
